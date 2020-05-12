@@ -1,0 +1,64 @@
+{
+  "cadastros": [
+    {
+      "id": 3,
+      "nome": "Jefferson Ricardo Mendonça",
+      "sobrenome": null,
+      "cpf": "23452345234",
+      "telefone": null,
+      "nascimento": null,
+      "veiculo": {
+        "marca": null,
+        "cor": null,
+        "modelo": null,
+        "placa": null,
+        "observacoes": null
+      },
+      "movimentacao": {
+        "dataInicial": "06/05/2020 23:18",
+        "dataFinal": "06/05/2020 23:26"
+      },
+      "preco": 2
+    },
+    {
+      "id": 4,
+      "nome": "marcelo",
+      "sobrenome": null,
+      "cpf": "45612354658",
+      "telefone": "(44) 99999-9999",
+      "nascimento": "12/12/2000",
+      "veiculo": {
+        "marca": "fiesta",
+        "cor": "Rosa",
+        "modelo": "City",
+        "placa": "asd-3234",
+        "observacoes": "asdfasdfa"
+      },
+      "movimentacao": {
+        "dataInicial": "07/05/2020 20:26",
+        "dataFinal": "14/05/2020 23:27"
+      },
+      "preco": 12
+    },
+    {
+      "id": 5,
+      "nome": "João Da Silva",
+      "sobrenome": null,
+      "cpf": null,
+      "telefone": null,
+      "nascimento": null,
+      "veiculo": {
+        "marca": "ford",
+        "cor": null,
+        "modelo": "City",
+        "placa": null,
+        "observacoes": null
+      },
+      "movimentacao": {
+        "dataInicial": "06/05/2020 21:00",
+        "dataFinal": null
+      },
+      "preco": 0
+    }
+  ]
+}

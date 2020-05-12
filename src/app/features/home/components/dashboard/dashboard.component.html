@@ -1,0 +1,107 @@
+<app-container titulo="Tela Principal">
+
+
+<div class="ui-g dashboard">
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-1 no-gutter">
+            <div class="overview-box-title">Check-Ins</div>
+            <div class="overview-box-details">
+                <i class="fa fa-map-pin overview-box-details-icon"></i>
+                <span class="overview-box-details-count">{{ qtdMovimentacoes }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-2 no-gutter">
+            <div class="overview-box-title">Check-Out</div>
+            <div class="overview-box-details">
+                <i class="fa fa-map-pin overview-box-details-icon"></i>
+                <span class="overview-box-details-count">{{ qtdCheckOut }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-3 no-gutter">
+            <div class="overview-box-title">Vagas Restantes</div>
+            <div class="overview-box-details">
+                <i class="fa fa-folder overview-box-details-icon"></i>
+                <span class="overview-box-details-count">{{  maxSpaces - (qtdMovimentacoes - qtdCheckOut) }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-4 no-gutter">
+            <div class="overview-box-title">Vagas Ocupadas</div>
+            <div class="overview-box-details">
+                <i class="fa fa-user overview-box-details-icon"></i>
+                <span class="overview-box-details-count">{{ qtdMovimentacoes - qtdCheckOut}}</span>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ui-g-12 ui-md-6 ui-lg-6 task-list">
+        <p-panel header="Tarefas Diarias" [style]="{'min-height':'180px'}">
+            <ul>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Limpeza da Guarita</span>
+                    <i class="fa fa-paint-brush"></i>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Checagem de Estoque e Materiais</span>
+                    <i class="fa fa-briefcase"></i>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Envio de Relatório</span>
+                    <i class="fa fa-area-chart"></i>
+                </li>
+                <li>
+                    <p-checkbox binary="true"></p-checkbox>
+                    <span class="task-name">Fechamento do Caixa</span>
+                    <i class="fa fa-credit-card"></i>
+                </li>
+            </ul>
+        </p-panel>
+    </div>
+
+
+    <div class="ui-g-12 ui-lg-6 contacts">
+        <p-panel header="CONTATOS" [style]="{'min-height':'180px'}">
+            <ul>
+                <li class="clearfix">
+                    <img src="assets/layout/images/avatarJeff.png" width="45">
+                    <div class="contact-info">
+                        <span class="name">Jefferson Mendonça</span>
+                        <span class="location">jeffersonrmendonca@hotmail.com</span>
+                        <span class="location">Proprietário</span>
+                    </div>
+                    <div class="contact-actions">
+                        <i class="fa fa-paper-plane-o"></i>
+                        <i class="fa fa-phone"></i>
+                    </div>
+                </li>
+                <li class="clearfix">
+                    <img src="assets/layout/images/avatarThay.png" width="45">
+                    <div class="contact-info">
+                        <span class="name">Thaynara Camila</span>
+                        <span class="location">thaynaracamila98@gmail.com</span>
+                        <span class="location">CEO</span>
+                    </div>
+                    <div class="contact-actions">
+                        <i class="fa fa-paper-plane-o"></i>
+                        <i class="fa fa-phone"></i>
+                    </div>
+                </li>
+            </ul>
+        </p-panel>
+    </div>
+
+    <div>
+        <h1>TODO - Jefferson - Inserir a listagem aqui !!!</h1>
+    </div>
+</div>
+
+</app-container>

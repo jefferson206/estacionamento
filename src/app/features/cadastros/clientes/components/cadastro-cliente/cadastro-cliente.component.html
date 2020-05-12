@@ -1,0 +1,125 @@
+<app-container [titulo]="editando ? 'Detalhes da Movimentação' : 'Cadastro de Movimentação'">
+
+	<div class="ui-grid-12">
+        <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3" style="padding-left: 0px;">
+			<button pButton type="button" (click)="voltar()" label="Voltar"
+					icon="pi pi-arrow-left" iconPos="left"></button>
+        </div>
+	  </div>
+	  
+	<form [formGroup]="formulario" (ngSubmit)="cadastrarMovimentacao()" style="margin-bottom: 20px;">
+		<p-fieldset legend="Dados Pessoais" class="p-col-12">
+			<div class="form-group p-grid">
+				<div class=" p-sm-12 p-md-12 p-xl-7">
+					<p>Nome </p>
+					<input type="text" id="nome" [style.width.%]="100" pInputText formControlName="nome" />
+					<app-form-message-erro [control]="obterControleDoCampo('nome')" ></app-form-message-erro>
+				</div>
+
+				<div class=" p-sm-12 p-md-12 p-xl-4">
+					<p>Sobrenome </p>
+					<input type="text" [style.width.%]="100" pInputText formControlName="sobrenome" />
+					<app-form-message-erro [control]="obterControleDoCampo('sobrenome')"></app-form-message-erro>
+				</div>	
+			</div>
+			<div class="form-group p-grid">
+				<div class="p-sm-12 p-md-6 p-xl-4">
+					<p>CPF </p>
+					<p-inputMask mask="999.999.999-99" placeholder="999.999.999-99" size="30" formControlName="cpf"
+						[style]="{'width':'100%'}" unmask="true">
+					</p-inputMask>
+					<app-form-message-erro [control]="obterControleDoCampo('cpf')" ></app-form-message-erro>
+				</div>
+				<div class="p-sm-12 p-md-5 p-xl-4">
+					<p>Telefone Celular </p>
+					<p-inputMask mask="(99) 99999-9999" placeholder="(99) 99999-9999" size="30" formControlName="telefone"
+						[style]="{'width':'100%'}">
+					</p-inputMask>
+				</div>
+				<div class="p-sm-12 p-md-6 p-xl-3">
+					<p>Nascimento </p>
+					<p-inputMask mask="99/99/9999" slotChar="dd/mm/yyyy" placeholder="31/12/1900" size="40"
+						formControlName="nascimento" [style]="{'width':'100%'}">
+					</p-inputMask>
+				</div>
+			</div>
+		</p-fieldset>
+
+		<p-fieldset legend="Dados do Veículo" class="p-col-12">
+			<div formGroupName="veiculo" class="p-grid">
+				<div class="p-grid">
+					<div class="p-sm-12 p-md-6 p-xl-3">
+						<p>Placa </p>
+						<p-inputMask id="placa" mask="***-****" placeholder="XXX-9999" size="32" formControlName="placa"
+							[style]="{'width':'100%'}">
+						</p-inputMask>
+					</div>
+					<div class="p-sm-12 p-md-5 p-xl-3">
+						<p>Marca </p>
+						<input id="marca" type="text" [style.width.%]="100" pInputText formControlName="marca" />
+					</div>
+					<div class="p-sm-12 p-md-6 p-xl-3">
+						<p>Modelo </p>
+						<input id="modelo" type="text" [style.width.%]="100" pInputText formControlName="modelo" />
+					</div>
+					<div class="p-sm-12 p-md-5 p-xl-2">
+						<p>Cor</p>
+						<p-dropdown [options]="cores" formControlName="cor" filter="true"
+							placeholder="Selecione uma cor" autoWidth="false" [style]="{'width': '100%'}">
+							<ng-template let-item pTemplate="cores">
+								<span style="vertical-align:middle; margin-left: .5em">{{item.label}}</span>
+							</ng-template>
+						</p-dropdown>
+					</div>
+					<div class="p-sm-12 p-md-12 p-xl-12">
+						<p>Observacoes </p>
+						<textarea rows="10" pInputTextarea [style.width.%]="98" placeholder="Observações e avarias"
+							autoResize="autoResize" formControlName="observacoes">
+						</textarea>
+					</div>
+				</div>
+			</div>
+		</p-fieldset>
+
+		<p-fieldset legend="Dados de Movimentação" class="p-col-12">
+			<div formGroupName="movimentacao" class="p-grid" style="margin-top: 10px;">
+				<div class="p-sm-12 p-md-6 p-xl-4">
+					<p>Entrada </p>
+					<p-calendar  [showTime]="true" formControlName="dataInicial" dateFormat="dd/mm/yy"
+						[style]="{'width':'100%'}" dataType="string" [inputStyle]="{'width':'85%'}" [showIcon]="true">
+					</p-calendar>
+				</div>
+				<div class="p-sm-12 p-md-5 p-xl-4">
+					<p>Saida </p>
+					<p-calendar dateFormat="dd/mm/yy" [showTime]="true" formControlName="dataFinal" #fromCal (ngModel)="value"
+						[style]="{'width':'100%'}" dataType="string" [inputStyle]="{'width':'85%'}" [showIcon]="true"
+						(onClose)=validarData()>
+					</p-calendar>
+				</div>
+			</div>
+			<input type="hidden" formControlName="preco">
+		</p-fieldset>
+
+		<div class="ui-g-12" *ngIf="!movimentacaoCadastrado; else jaCadastrado" style="padding-left: 0px;">
+			<div class="ui-sm-6 ui-md-4 ui-lg-2 ui-xl-2" style="padding-left: 0px; font-weight: bold;">
+				<button pButton type="submit" icon="pi pi-check" iconPos="right" 
+						class="ui-button-success" label="Cadastrar"></button>
+			</div>
+		</div>
+
+		<ng-template class="ui-g-12" #jaCadastrado style="padding-left: 0px;">
+			<div style="padding-left: 0px;">
+				<div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-2 ui-xl-2" style="padding-left: 0px;">
+					<button pButton type="button" (click)="atualizar()" label="Atualizar"
+							icon="pi pi-check" iconPos="right"></button>
+				</div>
+				<div class="ui-g-3 ui-sm-6 ui-md-4 ui-lg-2 ui-xl-2">
+					<button pButton type="button" (click)="deletar()" iconPos="right"
+							label="Deletar" class="ui-button-danger" icon="pi pi-times">
+					</button>
+				</div>
+			</div>
+		</ng-template>
+	</form>
+
+</app-container>

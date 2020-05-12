@@ -1,0 +1,29 @@
+<p-table #dataTable 
+		[value]="value" selectionMode="single" 
+		[dataKey]="id" [(selection)]="selection"
+        [style]="{'margin-bottom': '20px'}">
+          
+          <ng-template pTemplate="caption">
+                <label>{{cabecalho}}</label> 
+          </ng-template>
+
+          <ng-template pTemplate="header" columns="colunas">
+              <tr>
+                  <th *ngFor="let coluna of colunas" [pSortableColumn]="coluna.field">
+                      {{coluna.header}}
+                  </th>
+              </tr>
+		  </ng-template>
+		  
+		  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex">
+			<tr [pSelectableRow]="rowData" (click)="selected(rowData)" (click)="onClick($event)">
+            <td *ngFor="let coluna of colunas">
+                {{ coluna.type ? coluna.type.transform(resolveFields.resolveFieldData(rowData, coluna.field)) :
+                resolveFields.resolveFieldData(rowData,
+                coluna.field)}}
+                </td>
+			  </tr>
+          </ng-template>
+
+
+</p-table>

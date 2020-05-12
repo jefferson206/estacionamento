@@ -1,0 +1,62 @@
+<app-container titulo="Movimentação do Pátio">
+
+    <div class="ui-grid-12">
+        <div class="ui-sm-12 ui-md-6 ui-lg-3 ui-xl-3" style="padding-left: 0px;">
+            <button pButton type="button" (click)="novoCadastro()" label="Novo Cadastro"></button>
+        </div>
+  	</div>
+  
+	<p-table #dataTable [columns]="cols" [value]="movimentacoes$ | async" selectionMode="single" dataKey="id" [(selection)]="selectedMovimentacao"
+             [style]="{'margin-bottom': '20px'}" [globalFilterFields]="['nome', 'telefone', 'veiculo.marca', 'veiculo.modelo', 
+            'veiculo.placa', 'movimentacao.dataInicial', 'movimentacao.dataFinal', 'preco']">
+		  
+          <ng-template pTemplate="caption">
+              <label class="text-uppercase font-weight-bold">Pesquisa</label>
+              <div class="ui-table-globalfilter-containe" style="margin-bottom: 5px;">
+                  <input pInputText type="text" (input)="dataTable.filterGlobal($event.target.value, 'contains')"
+                         placeholder="Pesquisa Global"/>
+              </div>
+                <label>Estacionamento</label> 
+          </ng-template>
+
+          <ng-template pTemplate="header" let-columns="colunas">
+              <tr>
+                  <th *ngFor="let coluna of colunas" [pSortableColumn]="coluna.field">
+                      {{coluna.header}}
+                  </th>
+              </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-columns="colunas">
+            <tr [pSelectableRow]="rowData" (click)="atualizarMovimentacao(rowData.id)">
+                <td> {{ rowData.nome | uppercase }} </td>
+                <td> {{ rowData.telefone }} </td>
+                <td> {{ rowData.veiculo.marca | uppercase }} </td>
+                <td> {{ rowData.veiculo.modelo | uppercase }} </td>
+                <td> {{ rowData.veiculo.placa | uppercase }}</td>
+                <td> {{ rowData.movimentacao.dataInicial }}</td>
+                <td> {{ rowData.movimentacao.dataFinal }}</td>
+                <td> {{ rowData.preco | currency:'BRL' }}</td>
+            </tr>
+        </ng-template>
+
+          <!-- <ng-template pTemplate="body" let-rowData>
+            <tr [pSelectableRow]="rowData" (click)="atualizarMovimentacao(rowData.id)">
+            <td *ngFor="let coluna of movimentacaoFields">
+                {{ coluna.type ? coluna.type.transform(resolveFields.resolveFieldData(rowData, coluna.field)) :
+                resolveFields.resolveFieldData(rowData, coluna.field)}}
+                </td>
+              </tr>
+          </ng-template> -->
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="8" style="padding-bottom: 10px; padding-top: 10px; text-align: center; font-weight: bold;">
+                    <span id="msg-empty">OOPS! Nenhum registro encontrado.</span>
+                </td>
+            </tr>
+        </ng-template>
+
+        </p-table>
+
+</app-container>
