@@ -5,9 +5,10 @@
             <button pButton type="button" (click)="novoCadastro()" label="Novo Cadastro"></button>
         </div>
   	</div>
-  
-	<p-table #dataTable [columns]="cols" [value]="movimentacoes$ | async" selectionMode="single" dataKey="id" [(selection)]="selectedMovimentacao"
-             [style]="{'margin-bottom': '20px'}" [globalFilterFields]="['nome', 'telefone', 'veiculo.marca', 'veiculo.modelo', 
+      
+    <p-table #dataTable [columns]="cols" [value]="movimentacoes$ | async" selectionMode="single" dataKey="id" [(selection)]="selectedMovimentacao"
+            [responsive]="true" [paginator]="true" [rows]="5" [totalRecords]="totalRegistros"         
+            [style]="{'margin-bottom': '20px'}" [globalFilterFields]="['nome', 'telefone', 'veiculo.marca', 'veiculo.modelo', 
             'veiculo.placa', 'movimentacao.dataInicial', 'movimentacao.dataFinal', 'preco']">
 		  
           <ng-template pTemplate="caption">

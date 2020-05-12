@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResolveFieldDataService } from '../../../../../shared/services/resolve-fieldset.service';
 import { MovimentacaoService } from '../../services/cadastro.service';
 import { Movimentacao } from '../../models/cadastro.model';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-cliente',
@@ -17,6 +17,7 @@ export class ListaClienteComponent implements OnInit {
 	movimentacoes$: Observable<Movimentacao[]>;
 	colunas: any[];
 	selectedMovimentacao: Movimentacao;
+	totalRegistros: number = 0;
 
   	constructor(private cadastroService: MovimentacaoService, 
 				private router: Router, 
@@ -27,7 +28,8 @@ export class ListaClienteComponent implements OnInit {
 		this.movimentacoes$ = this.cadastroService.buscarTodos()
 			.pipe(
 				filter(req => req.ok),
-				map((req: any) => req.body)
+				map((req: any) => req.body),
+				tap( (req: any) => this.totalRegistros = req.length)
 			)
 		this.constroiColunas();
 	}
