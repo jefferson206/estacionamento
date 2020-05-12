@@ -7,7 +7,8 @@ export class TabelaPrecoService {
     constructor() {}
     private valor:number;
 
-    calcular(periodo){
+	
+	calcular(periodo){
 		let inicio = new Date(periodo.movimentacao.dataInicial)
 		let horasEntrada = inicio.getHours();
 		let minutosEntrada = inicio.getMinutes();
@@ -21,7 +22,11 @@ export class TabelaPrecoService {
 		let resultadoDeMinutos = minutosSaida - minutosEntrada
 		
 		this.tabelaDePreco(resultadoDeMinutos, resultadoDeHoras, resultadoDeDias)
-        return this.valor;
+		if(periodo.movimentacao.dataFinal === null){
+			return this.valor = 0;		
+		} else {
+			return this.valor;
+		}
     }
 
     private tabelaDePreco(resultadoDeMinutos, resultadoDeHoras, resultadoDeDias){
