@@ -1,17 +1,19 @@
-import { Observable } from 'rxjs';
 import { UpperCasePipe, DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 
 import { ResolveFieldDataService } from '../../../../../shared/services/resolve-fieldset.service';
 import { MovimentacaoService } from '../../services/cadastro.service';
 import { Movimentacao } from '../../models/cadastro.model';
-import { filter, map, tap } from 'rxjs/operators';
+import { CurrencyBrlPipe } from 'src/app/shared/components/pipes/currancyBrl';
 
 @Component({
   selector: 'app-lista-cliente',
   templateUrl: './lista-cliente.component.html',
-  styles: []
+  styles: [],
+  providers: [CurrencyBrlPipe]
 })
 export class ListaClienteComponent implements OnInit {
 	movimentacoes$: Observable<Movimentacao[]>;

@@ -13,6 +13,7 @@ export class TabelaComponent implements OnInit {
   @Input() value: string;
   @Input() selection: string;
   @Input() colunas: any;
+  
   @Output() button = new EventEmitter();
   @Output() opa = new EventEmitter();
 

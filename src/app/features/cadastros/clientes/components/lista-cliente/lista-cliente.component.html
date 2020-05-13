@@ -37,7 +37,7 @@
                 <td> {{ rowData.veiculo.placa | uppercase }}</td>
                 <td> {{ rowData.movimentacao.dataInicial }}</td>
                 <td> {{ rowData.movimentacao.dataFinal }}</td>
-                <td> {{ rowData.preco | currency:'BRL' }}</td>
+                <td> {{ rowData.preco | currencyBrl }}</td>
             </tr>
         </ng-template>
 

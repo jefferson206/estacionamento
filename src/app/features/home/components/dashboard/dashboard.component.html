@@ -99,8 +99,9 @@
         </p-panel>
     </div>
 
-    <div>
-        <h1>TODO - Jefferson - Inserir a listagem aqui !!!</h1>
+    <div style="margin-top: 10px;">
+        <app-tabela [cabecalho]="tituloLista" [value]="movimentacoes | async"
+                    [colunas]="colunas"></app-tabela>
     </div>
 </div>
 
