@@ -34,7 +34,7 @@ export class DashboardDemoComponent implements OnInit {
 
     ngOnInit() {
         this.carregarDashboard();
-        this.constroiListagem();
+        this.construirListagem();
     }
 
     carregarDashboard() {
@@ -52,9 +52,9 @@ export class DashboardDemoComponent implements OnInit {
         ).subscribe();
     }
 
-    constroiListagem() {
+    construirListagem() {
         this.tituloLista = "Listagem de movimentações";
-        this.constroiColunas();
+        this.construirColunas();
         this.movimentacoes = this.movimentacaoService.buscarTodos()
             .pipe(
                 filter(req => req.ok),
@@ -62,7 +62,7 @@ export class DashboardDemoComponent implements OnInit {
             );
     }
 
-    private constroiColunas(){
+    private construirColunas(){
 		this.colunas = [
 			{ field: 'nome', header: 'Cliente', type: this.uppercase },
 			{ field: 'telefone', header: 'Celular'},
